@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مسار | لتتبع العادات اليومية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap"
+      rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- الشريط العلوي -->
+    <header class="header">
+      <div class="container header-inner">
+        <div class="brand">
+          <div>
+            <h1>متتبع العادات</h1>
+            <p>خطوات صغيرة يومية تصنع فرقاً كبيراً</p>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button class="btn-primary" onclick="openModal()">
+            <span>+</span>
+            <span>عادة جديدة</span>
+          </button>
+          <button
+            class="btn-icon"
+            onclick="toggleTheme()"
+            id="themeBtn"
+            title="تغيير المظهر">
+            ☀️
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- قسم الإحصائيات والملخص اليومي -->
+      <section class="summary-section">
+        <div class="hero-card">
+          <div class="hero-text">
+            <span class="today-badge" id="todayNameBadge">اليوم</span>
+            <h2 id="motivationTitle">بداية يوم موفق!</h2>
+            <p id="motivationSub">
+              حدد العادات التي أنجزتها اليوم لمتابعة تقدمك.
+            </p>
+            <div class="progress-track">
+              <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-info">
+              <span id="progressText">0 من 0 مكتملة اليوم</span>
+              <span id="progressPercent">0%</span>
+            </div>
+          </div>
+
+          <div class="ring-wrap">
+            <svg class="ring-svg" viewBox="0 0 100 100">
+              <circle class="ring-bg" cx="50" cy="50" r="42"></circle>
+              <circle
+                class="ring-meter"
+                id="ringMeter"
+                cx="50"
+                cy="50"
+                r="42"></circle>
+            </svg>
+            <div class="ring-center">
+              <span class="ring-num" id="ringCount">0/0</span>
+              <span class="ring-label">إنجاز اليوم</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-boxes">
+          <div class="stat-card">
+            <span class="stat-icon">🔥</span>
+            <span class="stat-value" id="weeklyTotalStat">0</span>
+            <span class="stat-title">إنجازات الأسبوع</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">📈</span>
+            <span class="stat-value" id="weeklyRateStat">0%</span>
+            <span class="stat-title">الالتزام الأسبوعي</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- شريط التصفية ووضع التركيز -->
+      <section class="toolbar">
+        <div class="filters">
+          <button class="filter-btn active" onclick="setFilter('all', this)">
+            الكل
+          </button>
+          <button class="filter-btn" onclick="setFilter('health', this)">
+            صحة ولياقة
+          </button>
+          <button class="filter-btn" onclick="setFilter('work', this)">
+            إنتاجية وعمل
+          </button>
+          <button class="filter-btn" onclick="setFilter('self', this)">
+            تطوير ذاتي
+          </button>
+        </div>
+
+        <label class="focus-label">
+          <input
+            type="checkbox"
+            id="hideCompletedCheck"
+            onchange="renderHabits()" />
+          <span>اخفاء العادات المكتملة</span>
+        </label>
+      </section>
+
+      <!-- قائمة بطاقات العادات -->
+      <section class="habits-grid" id="habitsContainer"></section>
+    </main>
+
+    <!-- النافذة المنبثقة لإضافة عادة جديدة -->
+    <div
+      class="modal-backdrop"
+      id="habitModal"
+      onclick="handleBackdropClick(event)">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3>إضافة عادة جديدة</h3>
+          <button class="btn-delete" onclick="closeModal()" title="إغلاق">
+            ✕
+          </button>
+        </div>
+
+        <form onsubmit="addHabit(event)">
+          <div class="form-group">
+            <label for="habitName">اسم العادة</label>
+            <input
+              type="text"
+              id="habitName"
+              class="input-field"
+              placeholder="مثال: المشي 20 دقيقة يومياً..."
+              required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="habitCat">التصنيف</label>
+              <select id="habitCat" class="input-field">
+                <option value="health">صحة ولياقة</option>
+                <option value="work">إنتاجية وعمل</option>
+                <option value="self">تطوير ذاتي</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="habitIcon">الأيقونة</label>
+              <select id="habitIcon" class="input-field">
+                <option value="📖">📖 قراءة</option>
+                <option value="🏃‍♂️">🏃‍♂️ رياضة</option>
+                <option value="💻">💻 برمجة</option>
+                <option value="📚">📚 دراسة</option>
+                <option value="⭐">⭐ هدف</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" class="btn-ghost" onclick="closeModal()">
+              إلغاء
+            </button>
+            <button type="submit" class="btn-primary">حفظ العادة</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

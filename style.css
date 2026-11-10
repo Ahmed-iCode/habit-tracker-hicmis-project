@@ -1,0 +1,823 @@
+:root {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface-soft: #263349;
+  --surface-hover: #2d3c56;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --border: #334155;
+  --border-hover: #475569;
+  --primary: #10b981;
+  --primary-hover: #059669;
+  --primary-soft: rgba(16, 185, 129, 0.14);
+  --danger: #f43f5e;
+  --danger-soft: rgba(244, 63, 94, 0.14);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --fast: 150ms;
+  --normal: 220ms;
+}
+
+/* الوضع النهاري  */
+body.light {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-soft: #f1f5f9;
+  --surface-hover: #e2e8f0;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
+  --primary: #0d9488;
+  --primary-hover: #0f766e;
+  --primary-soft: rgba(13, 148, 136, 0.12);
+  --shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: "Tajawal", sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding-bottom: 3.5rem;
+  transition:
+    background-color var(--normal) var(--ease-standard),
+    color var(--normal) var(--ease-standard);
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* =========================================
+       3. الشريط العلوي (Header)
+       ========================================= */
+.header {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  padding: 0.85rem 0;
+  transition:
+    background-color var(--normal) var(--ease-standard),
+    border-color var(--normal) var(--ease-standard);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background-color: var(--primary);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.brand h1 {
+  font-size: 1.18rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.brand p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background-color: var(--surface-soft);
+  color: var(--text);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 1.05rem;
+  transition:
+    background-color var(--fast) var(--ease-standard),
+    border-color var(--fast) var(--ease-standard),
+    transform var(--fast) var(--ease-standard);
+}
+
+.btn-icon:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--border-hover);
+}
+
+.btn-icon:active {
+  transform: scale(0.95);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #ffffff;
+  border: none;
+  height: 40px;
+  padding: 0 1.05rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition:
+    background-color var(--fast) var(--ease-standard),
+    transform var(--fast) var(--ease-standard);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-primary:active {
+  transform: scale(0.96);
+}
+
+/* =========================================
+       4. لوحة الملخص اليومي والإحصائيات
+       ========================================= */
+.summary-section {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: 1.65fr 1fr;
+  gap: 1rem;
+}
+
+.hero-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.3rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.today-badge {
+  display: inline-block;
+  background-color: var(--primary-soft);
+  color: var(--primary);
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: 99px;
+  margin-bottom: 0.45rem;
+}
+
+.hero-text h2 {
+  font-size: 1.18rem;
+  font-weight: 800;
+  margin-bottom: 0.2rem;
+}
+
+.hero-text p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.9rem;
+}
+
+.progress-track {
+  height: 9px;
+  background-color: var(--surface-soft);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 0.4rem;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background-color: var(--primary);
+  border-radius: 99px;
+  transition: width 350ms var(--ease-out);
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* الحلقة الدائرية SVG */
+.ring-wrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+}
+
+.ring-svg {
+  width: 96px;
+  height: 96px;
+  transform: rotate(-90deg);
+}
+
+.ring-bg {
+  fill: none;
+  stroke: var(--surface-soft);
+  stroke-width: 8;
+}
+
+.ring-meter {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 264;
+  stroke-dashoffset: 264;
+  transition: stroke-dashoffset 400ms var(--ease-out);
+}
+
+.ring-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring-num {
+  font-weight: 800;
+  font-size: 1.1rem;
+  line-height: 1.1;
+}
+
+.ring-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.stats-boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.stat-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-icon {
+  font-size: 1.25rem;
+  margin-bottom: 0.2rem;
+}
+
+.stat-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.stat-title {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+/* =========================================
+       5. شريط الفلترة ووضع التركيز (Toolbar)
+       ========================================= */
+.toolbar {
+  margin-top: 1rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.filters {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.filter-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.84rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color var(--fast) var(--ease-standard),
+    color var(--fast) var(--ease-standard);
+}
+
+.filter-btn:hover {
+  color: var(--text);
+  background-color: var(--surface-soft);
+}
+
+.filter-btn.active {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.focus-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-soft);
+  user-select: none;
+  transition: color var(--fast) var(--ease-standard);
+}
+
+.focus-label:hover {
+  color: var(--text);
+}
+
+.focus-label input {
+  accent-color: var(--primary);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+/* =========================================
+       6. شبكة بطاقات العادات (Micro-Interactions)
+       ========================================= */
+.habits-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes checkPop {
+  0% {
+    transform: scale(0.92);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.habit-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.15rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  animation: cardEnter 200ms var(--ease-out) both;
+  transition:
+    border-color var(--fast) var(--ease-standard),
+    transform var(--fast) var(--ease-standard);
+}
+
+.habit-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.habit-card.done-today {
+  border-color: rgba(16, 185, 129, 0.45);
+}
+
+.habit-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.habit-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.habit-emoji {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background-color: var(--surface-soft);
+  display: grid;
+  place-items: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.habit-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+  transition: opacity var(--fast) var(--ease-standard);
+}
+
+.habit-card.done-today .habit-title {
+  text-decoration: line-through;
+  opacity: 0.65;
+}
+
+.cat-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.12rem 0.55rem;
+  border-radius: 99px;
+  margin-top: 0.2rem;
+}
+
+.cat-health {
+  background: rgba(16, 185, 129, 0.14);
+  color: #34d399;
+}
+.cat-work {
+  background: rgba(59, 130, 246, 0.14);
+  color: #60a5fa;
+}
+.cat-self {
+  background: rgba(168, 85, 247, 0.14);
+  color: #c084fc;
+}
+
+body.light .cat-health {
+  color: #059669;
+}
+body.light .cat-work {
+  color: #2563eb;
+}
+body.light .cat-self {
+  color: #7e22ce;
+}
+
+.btn-delete {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition:
+    background-color var(--fast) var(--ease-standard),
+    color var(--fast) var(--ease-standard);
+}
+
+.btn-delete:hover {
+  background-color: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* شريط أيام الأسبوع المصغر */
+.week-strip {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.35rem;
+  background-color: var(--surface-soft);
+  padding: 0.45rem;
+  border-radius: 12px;
+}
+
+.day-btn {
+  border: 1px solid transparent;
+  background-color: var(--surface);
+  color: var(--text-muted);
+  border-radius: 8px;
+  padding: 0.35rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 700;
+  transition:
+    background-color var(--fast) var(--ease-standard),
+    color var(--fast) var(--ease-standard),
+    border-color var(--fast) var(--ease-standard),
+    transform var(--fast) var(--ease-standard);
+}
+
+.day-btn:hover {
+  border-color: var(--border-hover);
+  color: var(--text);
+}
+
+.day-btn:active {
+  transform: scale(0.93);
+}
+
+.day-btn.is-today {
+  border-color: var(--primary);
+}
+
+.day-btn.checked {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+  animation: checkPop 180ms var(--ease-out);
+}
+
+.day-dot {
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.habit-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.streak-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.btn-check-today {
+  border: 1px solid var(--border);
+  background-color: var(--surface-soft);
+  color: var(--text);
+  padding: 0.42rem 0.95rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color var(--fast) var(--ease-standard),
+    border-color var(--fast) var(--ease-standard),
+    color var(--fast) var(--ease-standard),
+    transform var(--fast) var(--ease-standard);
+}
+
+.btn-check-today:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--border-hover);
+}
+
+.btn-check-today:active {
+  transform: scale(0.96);
+}
+
+.btn-check-today.done {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+  animation: checkPop 180ms var(--ease-out);
+}
+
+.empty-box {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  background-color: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+}
+
+/* =========================================
+       7. النافذة المنبثقة لإضافة عادة (Modal)
+       ========================================= */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(9, 13, 24, 0.7);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 60;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 180ms var(--ease-standard),
+    visibility 180ms var(--ease-standard);
+}
+
+.modal-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-box {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transform: scale(0.97) translateY(6px);
+  transition: transform 180ms var(--ease-out);
+}
+
+.modal-backdrop.open .modal-box {
+  transform: scale(1) translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+
+.modal-header h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.form-group {
+  margin-bottom: 0.9rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.input-field {
+  height: 42px;
+  padding: 0 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background-color: var(--surface-soft);
+  color: var(--text);
+  outline: none;
+  width: 100%;
+  transition: border-color var(--fast) var(--ease-standard);
+}
+
+.input-field:focus {
+  border-color: var(--primary);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.55rem;
+  margin-top: 1.2rem;
+}
+
+.btn-ghost {
+  background-color: var(--surface-soft);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  height: 40px;
+  padding: 0 0.95rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color var(--fast) var(--ease-standard),
+    background-color var(--fast) var(--ease-standard);
+}
+
+.btn-ghost:hover {
+  color: var(--text);
+  background-color: var(--surface-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================
+       8. التجاوب مع الشاشات والهواتف المحمولة
+       ========================================= */
+@media (max-width: 768px) {
+  .summary-section {
+    grid-template-columns: 1fr;
+  }
+  .habits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-card {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .brand p {
+    display: none;
+  }
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .focus-label {
+    justify-content: center;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
